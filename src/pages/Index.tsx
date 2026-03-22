@@ -5,15 +5,18 @@ import HeartCursorTrail from "@/components/HeartCursorTrail";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import RomanticMessage from "@/components/RomanticMessage";
 import WelcomeScreen from "@/components/WelcomeScreen";
+import LoadingScreen from "@/components/LoadingScreen";
 import GiftBox from "@/components/GiftBox";
 import LoveLetter from "@/components/LoveLetter";
 import MemoryGallery from "@/components/MemoryGallery";
 import HeartCatchGame from "@/components/HeartCatchGame";
 import BirthdayCountdown from "@/components/BirthdayCountdown";
 import FinalSurprise from "@/components/FinalSurprise";
+import RelationshipDuration from "@/components/RelationshipDuration";
 
 const steps = [
   "welcome",
+  "duration",
   "gift",
   "letter",
   "gallery",
@@ -27,6 +30,7 @@ type Step = (typeof steps)[number];
 const TOTAL_MEMORIES = 4;
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [step, setStep] = useState<Step>("welcome");
   
   // Progress tracking states
@@ -42,6 +46,11 @@ const Index = () => {
   // Track gift completion
   const handleGiftComplete = useCallback(() => {
     setGiftOpened(true);
+    goTo("duration");
+  }, []);
+
+  // Track duration display completion
+  const handleDurationComplete = useCallback(() => {
     goTo("letter");
   }, []);
 
@@ -60,23 +69,39 @@ const Index = () => {
   // Finale is always unlocked now
   const isFinaleUnlocked = true;
 
+  // Handle loading completion
+  const handleLoadingComplete = useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background overflow-hidden relative">
-      {/* Global Background Effects */}
-      <FloatingHearts count={15} sparkles={true} />
-      <HeartCursorTrail />
-      <BackgroundMusic 
-        src="/assets/music/happy-birthday.mp3"
-        isFinale={step === "finale"}
-        useAmbient={false}
-        autoPlay={true}
-        isReduced={isVideoPlaying}
-        reducedVolume={0.2}
+      {/* Loading Screen - shows first */}
+      <LoadingScreen 
+        onComplete={handleLoadingComplete}
+        voiceMessageSrc="/assets/music/voice-message.mp3"
       />
-      {/* Random romantic messages throughout the journey */}
-      <RomanticMessage />
+
+      {/* Global Background Effects - only show after loading */}
+      {!isLoading && (
+        <>
+          <FloatingHearts count={15} sparkles={true} />
+          <HeartCursorTrail />
+          <BackgroundMusic 
+            src="/assets/music/happy-birthday.mp3"
+            isFinale={step === "finale"}
+            useAmbient={false}
+            autoPlay={true}
+            isReduced={isVideoPlaying}
+            reducedVolume={0.2}
+          />
+          {/* Random romantic messages throughout the journey */}
+          <RomanticMessage />
+        </>
+      )}
 
       <AnimatePresence mode="wait">
+        {!isLoading && (
         <motion.div
           key={step}
           initial={{ opacity: 0, x: 50 }}
@@ -86,6 +111,12 @@ const Index = () => {
           className="relative z-10"
         >
           {step === "welcome" && <WelcomeScreen onStart={() => goTo("gift")} />}
+          
+          {step === "duration" && (
+            <RelationshipDuration 
+              onComplete={handleDurationComplete}
+            />
+          )}
           
           {step === "gift" && (
             <GiftBox 
@@ -121,6 +152,7 @@ const Index = () => {
             <FinalSurprise isUnlocked={isFinaleUnlocked} />
           )}
         </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

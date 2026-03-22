@@ -32,7 +32,7 @@ const Cake3D = ({ onCandleBlown }: Cake3DProps) => {
         title="Click to blow out the candle!"
       >
         {/* SVG Cake */}
-        <svg width="280" height="280" viewBox="0 0 280 280" className="drop-shadow-xl">
+        <svg width="400" height="400" viewBox="0 0 280 280" className="drop-shadow-xl">
           {/* Cake Plate */}
           <ellipse cx="140" cy="265" rx="120" ry="15" fill="#d1d5db" />
           <ellipse cx="140" cy="260" rx="110" ry="12" fill="#e5e7eb" />

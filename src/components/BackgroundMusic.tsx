@@ -19,7 +19,7 @@ const BackgroundMusic = ({
   isFinale, 
   useAmbient = false, 
   autoPlay = true,
-  volume: initialVolume = 1,
+  volume: initialVolume = 0.5,
   reducedVolume = 0.3,
   isReduced = false
 }: BackgroundMusicProps) => {

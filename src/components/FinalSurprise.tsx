@@ -339,13 +339,13 @@ const FinalSurprise = ({ isUnlocked = true }: FinalSurpriseProps) => {
               transition={{ delay: 1.8, type: "spring" }}
             >
               <motion.p
-                className="text-3xl md:text-4xl font-display italic text-rose-700"
+                className="text-3xl md:text-4xl font-display italic text-white-700"
                 animate={{
                   scale: [1, 1.05, 1],
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                Forever yours — Mitesh 🤍
+                Forever yours — Mitss 🤍
               </motion.p>
             </motion.div>
 
