@@ -190,7 +190,7 @@ const LoadingScreen = ({ onComplete, voiceMessageSrc }: LoadingScreenProps) => {
       console.log("Voice playing:", voiceAudioRef.current.currentTime, "/", voiceAudioRef.current.duration);
     }
   }, []);
-  
+
 
   const handleVoiceEnded = useCallback(() => {
     // Explicitly pause and reset the audio
