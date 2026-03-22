@@ -24,7 +24,7 @@ class SoundGenerator {
       this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
       this.masterGain = this.ctx.createGain();
       this.masterGain.connect(this.ctx.destination);
-      this.masterGain.gain.value = 0.7; // Global volume (soft)
+      this.masterGain.gain.value = 0.5; // Global volume (slightly lower)
     }
   }
 
