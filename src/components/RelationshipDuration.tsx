@@ -10,7 +10,7 @@ interface RelationshipDurationProps {
 }
 
 // Relationship start date - you can modify this
-const RELATIONSHIP_START_DATE = new Date("2024-01-01T00:00:00");
+const RELATIONSHIP_START_DATE = new Date("2023-04-18T00:54:00");
 
 const RelationshipDuration = ({ 
   startDate = RELATIONSHIP_START_DATE,

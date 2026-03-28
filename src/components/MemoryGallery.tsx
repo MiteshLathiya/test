@@ -23,7 +23,7 @@ interface MemoryGalleryProps {
 const memories: Memory[] = [
   {
     id: 1,
-    date: "18 March 2023",
+    date: "18 April 2023",
     caption: "The first time I told you I love you ❤️",
     type: "image",
     src: "/assets/images/first-love-you.jpeg",
